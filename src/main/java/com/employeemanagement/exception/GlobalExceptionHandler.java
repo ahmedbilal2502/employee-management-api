@@ -1,5 +1,6 @@
 package com.employeemanagement.exception;
 
+import com.employeemanagement.common.ResponseMessage;
 import com.employeemanagement.model.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,7 @@ public class GlobalExceptionHandler {
 
         ApiResponse apiResponse = new ApiResponse(
                 String.valueOf(HttpStatus.BAD_REQUEST.value()),
-                "Please correct the validation errors and try again.",
+                ResponseMessage.REQUEST_VALIDATION_MESSAGE,
                 errors
         );
         return new ResponseEntity<>(apiResponse, HttpStatus.BAD_REQUEST);
@@ -49,7 +50,7 @@ public class GlobalExceptionHandler {
 
         ApiResponse errorResponse = new ApiResponse(
                 String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()),
-                "An unexpected error occurred",
+                ResponseMessage.GENERAL_EXCEPTION_MESSAGE,
                 null
         );
 
