@@ -46,9 +46,9 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ApiResponse<?>> handleException(Exception ex) {
+    public ResponseEntity<ApiResponse<String>> handleException(Exception ex) {
 
-        ApiResponse errorResponse = new ApiResponse(
+        ApiResponse errorResponse = new ApiResponse<String>(
                 String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()),
                 ResponseMessage.GENERAL_EXCEPTION_MESSAGE,
                 null
