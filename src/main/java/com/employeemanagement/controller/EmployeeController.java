@@ -5,7 +5,6 @@ import com.employeemanagement.model.ApiResponse;
 import com.employeemanagement.model.dto.EmployeeDTO;
 import com.employeemanagement.service.EmployeeService;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

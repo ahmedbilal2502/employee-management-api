@@ -33,7 +33,7 @@ public class GlobalExceptionHandler {
     }
 
 
-    @ExceptionHandler(EmployeeNotFoundException.class)
+    @ExceptionHandler({EmployeeNotFoundException.class, CustomUsernameNotFoundException.class})
     public ResponseEntity<ApiResponse<String>> employeeNotFound(EmployeeNotFoundException ex) {
 
         ApiResponse errorResponse = new ApiResponse(

@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -30,7 +31,12 @@ public class EmployeeService {
     }
 
     public ApiResponse<List<EmployeeDTO>> getAllEmployees() {
-        List<EmployeeDTO> employeeDTOS = employeeRepository.findAll().stream().map(employeeMapper::toDTO).toList();
+        List<EmployeeDTO> employeeDTOS = employeeRepository
+                .findAll()
+                .stream()
+                .map(employeeMapper::toDTO)
+                .collect(Collectors.toList());
+
         if (employeeDTOS.isEmpty()) {
             return new ApiResponse<>(
                     String.valueOf(HttpStatus.OK.value()),
