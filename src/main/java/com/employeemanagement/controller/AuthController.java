@@ -23,19 +23,19 @@ public class AuthController {
 
     private final AuthService authService;
 
-    @PostMapping("/register")
+    @PostMapping(ConstantUrl.AUTH_USER_REGISTERED)
     public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequest request) {
 
         return ResponseEntity.ok(authService.register(request));
     }
 
-    @PostMapping("/authenticate")
+    @PostMapping(ConstantUrl.AUTHENTICATE)
     public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request) {
 
         return ResponseEntity.ok(authService.authenticate(request));
     }
 
-    @PostMapping("/refresh-token")
+    @PostMapping(ConstantUrl.REFRESH_TOKEN)
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         authService.refreshToken(request, response);

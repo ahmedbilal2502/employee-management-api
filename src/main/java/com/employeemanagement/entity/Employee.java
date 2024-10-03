@@ -12,9 +12,9 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @Table(name = "employees")
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Employee {
 
     @Id

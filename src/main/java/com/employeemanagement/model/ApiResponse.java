@@ -6,9 +6,10 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
-@Data
+
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public class ApiResponse<T> implements Serializable {
     private String statusCode;
     private String message;

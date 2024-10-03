@@ -45,15 +45,27 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ApiResponse<String>> handleException(Exception ex) {
+    @ExceptionHandler(InvalidCredentialsException.class)
+    public ResponseEntity<ApiResponse<String>> invalidCredentialsException(InvalidCredentialsException ex) {
 
-        ApiResponse errorResponse = new ApiResponse<String>(
-                String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()),
-                ResponseMessage.GENERAL_EXCEPTION_MESSAGE,
+        ApiResponse errorResponse = new ApiResponse(
+                String.valueOf(HttpStatus.UNAUTHORIZED.value()),
+                ex.getMessage(),
                 null
         );
 
+        return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ApiResponse<String>> handleException(Exception ex) {
+
+    	 ApiResponse errorResponse = new ApiResponse<>(
+                 String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()),
+                 ResponseMessage.GENERAL_EXCEPTION_MESSAGE,
+                 null
+         );
+        ex.printStackTrace();
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 

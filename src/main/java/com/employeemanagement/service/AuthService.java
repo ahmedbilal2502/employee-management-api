@@ -4,6 +4,7 @@ import com.employeemanagement.config.jwt.JwtService;
 import com.employeemanagement.entity.Token;
 import com.employeemanagement.entity.TokenType;
 import com.employeemanagement.entity.User;
+import com.employeemanagement.exception.InvalidCredentialsException;
 import com.employeemanagement.model.dto.AuthenticationRequest;
 import com.employeemanagement.model.dto.RegisterRequest;
 import com.employeemanagement.model.response.AuthenticationResponse;
@@ -57,9 +58,9 @@ public class AuthService {
                 )
         );
         User user = repository.findByEmail(request.getEmail())
-                .orElseThrow();
-        var jwtToken = jwtService.generateToken(user);
-        var refreshToken = jwtService.generateRefreshToken(user);
+                .orElseThrow(() ->  new InvalidCredentialsException("Invalid email or password."));
+        String jwtToken = jwtService.generateToken(user);
+        String refreshToken = jwtService.generateRefreshToken(user);
         revokeAllUserTokens(user);
         saveUserToken(user, jwtToken);
         return AuthenticationResponse.builder()

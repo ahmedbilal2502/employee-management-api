@@ -2,17 +2,21 @@ package com.employeemanagement.controller;
 
 import com.employeemanagement.common.ConstantUrl;
 import com.employeemanagement.common.ResponseMessage;
+import com.employeemanagement.entity.Role;
 import com.employeemanagement.model.ApiResponse;
 import com.employeemanagement.model.dto.EmployeeDTO;
+import com.employeemanagement.model.dto.RegisterRequest;
 import com.employeemanagement.repository.EmployeeRepository;
 import com.employeemanagement.service.EmployeeService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Arrays;
@@ -27,7 +31,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(EmployeeController.class)
+@SpringBootTest
+@AutoConfigureMockMvc
 class EmployeeControllerTest {
 
     @MockBean
@@ -41,6 +46,7 @@ class EmployeeControllerTest {
     private EmployeeRepository employeeRepository;
 
     @Test
+    @WithMockUser("USER")
     void shouldCreateEmployee() throws Exception {
         EmployeeDTO employeeDTO = new EmployeeDTO();
         employeeDTO.setFirstName("John");
@@ -48,13 +54,11 @@ class EmployeeControllerTest {
         employeeDTO.setEmail("john.doe@example.com");
         employeeDTO.setDepartment("Engineering");
         employeeDTO.setSalary(75000.00);
-
-        mockMvc.perform(post(ConstantUrl.EMPLOYEE_BASE_URL).contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(employeeDTO)))
-                .andExpect(status().isOk())
-                .andDo(print());
+        mockMvc.perform(post(ConstantUrl.EMPLOYEE_BASE_URL).contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(employeeDTO))).andExpect(status().isOk()).andDo(print());
     }
+
     @Test
+    @WithMockUser("USER")
     void request_validation_Create_Employee() throws Exception {
         EmployeeDTO employeeDTO = new EmployeeDTO();
         employeeDTO.setLastName("Doe");
@@ -62,13 +66,11 @@ class EmployeeControllerTest {
         employeeDTO.setDepartment("Engineering");
         employeeDTO.setSalary(75000.00);
 
-        mockMvc.perform(post(ConstantUrl.EMPLOYEE_BASE_URL).contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(employeeDTO)))
-                .andExpect(status().isBadRequest())
-                .andDo(print());
+        mockMvc.perform(post(ConstantUrl.EMPLOYEE_BASE_URL).contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(employeeDTO))).andExpect(status().isBadRequest()).andDo(print());
     }
 
     @Test
+    @WithMockUser("USER")
     void shouldGetEmployeeById() throws Exception {
         Long employeeId = 1L;
         EmployeeDTO employeeDTO = new EmployeeDTO();
@@ -78,23 +80,15 @@ class EmployeeControllerTest {
         employeeDTO.setDepartment("Engineering");
         employeeDTO.setSalary(75000.00);
 
-        ApiResponse<EmployeeDTO> apiResponse = new ApiResponse<>(
-                String.valueOf(HttpStatus.OK.value()),
-                ResponseMessage.GET_EMPLOYEE_MESSAGE,
-                employeeDTO
-        );
+        ApiResponse<EmployeeDTO> apiResponse = new ApiResponse<>(String.valueOf(HttpStatus.OK.value()), ResponseMessage.GET_EMPLOYEE_MESSAGE, employeeDTO);
 
         when(employeeService.getEmployeeById(employeeId)).thenReturn(apiResponse);
 
-        mockMvc.perform(get(ConstantUrl.EMPLOYEE_BASE_URL + "/" + employeeId)
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.message").value(ResponseMessage.GET_EMPLOYEE_MESSAGE))
-                .andExpect(jsonPath("$.data.firstName").value("John"))
-                .andDo(print());
+        mockMvc.perform(get(ConstantUrl.EMPLOYEE_BASE_URL + "/" + employeeId).contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk()).andExpect(jsonPath("$.message").value(ResponseMessage.GET_EMPLOYEE_MESSAGE)).andExpect(jsonPath("$.data.firstName").value("John")).andDo(print());
     }
 
     @Test
+    @WithMockUser("USER")
     void shouldGetAllEmployees() throws Exception {
         EmployeeDTO employee1 = new EmployeeDTO();
         employee1.setFirstName("John");
@@ -110,20 +104,14 @@ class EmployeeControllerTest {
         employee2.setDepartment("Marketing");
         employee2.setSalary(65000.00);
 
-        ApiResponse<List<EmployeeDTO>> employeeDTOS= new ApiResponse<>(
-                String.valueOf(HttpStatus.OK.value()),
-                ResponseMessage.GET_ALL_EMPLOYEE_MESSAGE,
-                Arrays.asList(employee1, employee2)
-        );
+        ApiResponse<List<EmployeeDTO>> employeeDTOS = new ApiResponse<>(String.valueOf(HttpStatus.OK.value()), ResponseMessage.GET_ALL_EMPLOYEE_MESSAGE, Arrays.asList(employee1, employee2));
         when(employeeService.getAllEmployees()).thenReturn(employeeDTOS);
 
-        mockMvc.perform(get(ConstantUrl.EMPLOYEE_BASE_URL)
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(status().isOk())
-                .andDo(print());
+        mockMvc.perform(get(ConstantUrl.EMPLOYEE_BASE_URL).contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk()).andDo(print());
     }
+
     @Test
+    @WithMockUser("ADMIN")
     void shouldUpdateEmployee() throws Exception {
         Long employeeId = 1L;
         EmployeeDTO updatedEmployeeDTO = new EmployeeDTO();
@@ -133,31 +121,20 @@ class EmployeeControllerTest {
         updatedEmployeeDTO.setDepartment("Engineering");
         updatedEmployeeDTO.setSalary(80000.00);
         ApiResponse<EmployeeDTO> apiResponse;
-        apiResponse = new ApiResponse<>(
-                String.valueOf(HttpStatus.OK.value()),
-                ResponseMessage.GET_EMPLOYEE_MESSAGE,
-                updatedEmployeeDTO
-        );
+        apiResponse = new ApiResponse<>(String.valueOf(HttpStatus.OK.value()), ResponseMessage.GET_EMPLOYEE_MESSAGE, updatedEmployeeDTO);
 
-        when(employeeService.updateEmployee(eq(employeeId), any(EmployeeDTO.class)))
-                .thenReturn(apiResponse);
+        when(employeeService.updateEmployee(eq(employeeId), any(EmployeeDTO.class))).thenReturn(apiResponse);
 
-        mockMvc.perform(put(ConstantUrl.EMPLOYEE_BASE_URL+"/" +employeeId)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(updatedEmployeeDTO)))
-                .andExpect(status().isOk())
-                .andDo(print());
+        mockMvc.perform(put(ConstantUrl.EMPLOYEE_BASE_URL + "/" + employeeId).contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(updatedEmployeeDTO))).andExpect(status().isOk()).andDo(print());
     }
 
     @Test
+    @WithMockUser("USER")
     void shouldDeleteEmployee() throws Exception {
         Long employeeId = 1L;
 
         doNothing().when(employeeService).deleteEmployee(employeeId);
 
-        mockMvc.perform(delete(ConstantUrl.EMPLOYEE_BASE_URL + "/" + employeeId)
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isNoContent())
-                .andDo(print());
+        mockMvc.perform(delete(ConstantUrl.EMPLOYEE_BASE_URL + "/" + employeeId).contentType(MediaType.APPLICATION_JSON)).andExpect(status().isNoContent()).andDo(print());
     }
 }

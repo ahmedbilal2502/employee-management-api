@@ -6,6 +6,7 @@ import com.employeemanagement.model.dto.EmployeeDTO;
 import com.employeemanagement.service.EmployeeService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +20,9 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @PostMapping
-    public ResponseEntity<ApiResponse<EmployeeDTO>> createEmployee(@Valid @RequestBody EmployeeDTO employeeDTO) {
+    public ResponseEntity<ApiResponse<EmployeeDTO>> createEmployee(
+            @RequestHeader(name = HttpHeaders.AUTHORIZATION)
+            @Valid @RequestBody EmployeeDTO employeeDTO) {
 
         return ResponseEntity.ok(employeeService.createEmployee(employeeDTO));
     }
