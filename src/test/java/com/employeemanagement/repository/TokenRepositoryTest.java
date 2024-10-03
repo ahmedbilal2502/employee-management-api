@@ -10,6 +10,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -68,7 +69,7 @@ class TokenRepositoryTest {
         token.setRevoked(false);
         tokenRepository.save(token);
 
-        var foundToken = tokenRepository.findByToken("uniqueToken");
+        Optional<Token> foundToken = tokenRepository.findByToken("uniqueToken");
 
         assertThat(foundToken).isPresent();
         assertThat(foundToken.get().getToken()).isEqualTo("uniqueToken");
