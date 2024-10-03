@@ -1,4 +1,4 @@
-package com.employeemanagement.common;
+package com.employeemanagement.util;
 
 public class ConstantUrl {
 

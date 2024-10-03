@@ -1,8 +1,8 @@
 package com.employeemanagement.controller;
 
-import com.employeemanagement.common.ConstantUrl;
+import com.employeemanagement.util.ConstantUrl;
 import com.employeemanagement.config.jwt.JwtService;
-import com.employeemanagement.entity.Role;
+import com.employeemanagement.model.entity.Role;
 import com.employeemanagement.model.dto.AuthenticationRequest;
 import com.employeemanagement.model.dto.RegisterRequest;
 import com.employeemanagement.model.response.AuthenticationResponse;

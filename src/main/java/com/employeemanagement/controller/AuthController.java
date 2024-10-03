@@ -1,6 +1,6 @@
 package com.employeemanagement.controller;
 
-import com.employeemanagement.common.ConstantUrl;
+import com.employeemanagement.util.ConstantUrl;
 import com.employeemanagement.model.dto.AuthenticationRequest;
 import com.employeemanagement.model.dto.RegisterRequest;
 import com.employeemanagement.model.response.AuthenticationResponse;

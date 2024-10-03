@@ -5,7 +5,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.stereotype.Service;
 
-import com.employeemanagement.entity.Token;
+import com.employeemanagement.model.entity.Token;
 import com.employeemanagement.repository.TokenRepository;
 
 import jakarta.servlet.http.HttpServletRequest;

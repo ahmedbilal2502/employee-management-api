@@ -1,7 +1,7 @@
 package com.employeemanagement.service;
 
-import com.employeemanagement.common.ResponseMessage;
-import com.employeemanagement.entity.Employee;
+import com.employeemanagement.util.ResponseMessage;
+import com.employeemanagement.model.entity.Employee;
 import com.employeemanagement.exception.EmployeeNotFoundException;
 import com.employeemanagement.mapper.EmployeeMapper;
 import com.employeemanagement.model.ApiResponse;

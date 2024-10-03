@@ -2,9 +2,9 @@ package com.employeemanagement.service;
 
 
 import com.employeemanagement.config.jwt.JwtService;
-import com.employeemanagement.entity.Role;
-import com.employeemanagement.entity.Token;
-import com.employeemanagement.entity.User;
+import com.employeemanagement.model.entity.Role;
+import com.employeemanagement.model.entity.Token;
+import com.employeemanagement.model.entity.User;
 import com.employeemanagement.model.dto.AuthenticationRequest;
 import com.employeemanagement.model.dto.RegisterRequest;
 import com.employeemanagement.model.response.AuthenticationResponse;

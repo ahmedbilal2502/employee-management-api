@@ -1,6 +1,6 @@
 package com.employeemanagement.mapper;
 
-import com.employeemanagement.entity.Employee;
+import com.employeemanagement.model.entity.Employee;
 import com.employeemanagement.model.dto.EmployeeDTO;
 import org.springframework.stereotype.Component;
 

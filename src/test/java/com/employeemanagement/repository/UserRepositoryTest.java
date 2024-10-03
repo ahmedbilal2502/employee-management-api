@@ -1,7 +1,7 @@
 package com.employeemanagement.repository;
 
-import com.employeemanagement.entity.Role;
-import com.employeemanagement.entity.User;
+import com.employeemanagement.model.entity.Role;
+import com.employeemanagement.model.entity.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

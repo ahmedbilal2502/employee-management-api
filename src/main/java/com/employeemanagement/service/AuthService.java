@@ -1,9 +1,9 @@
 package com.employeemanagement.service;
 
 import com.employeemanagement.config.jwt.JwtService;
-import com.employeemanagement.entity.Token;
-import com.employeemanagement.entity.TokenType;
-import com.employeemanagement.entity.User;
+import com.employeemanagement.model.entity.Token;
+import com.employeemanagement.model.entity.TokenType;
+import com.employeemanagement.model.entity.User;
 import com.employeemanagement.exception.InvalidCredentialsException;
 import com.employeemanagement.model.dto.AuthenticationRequest;
 import com.employeemanagement.model.dto.RegisterRequest;

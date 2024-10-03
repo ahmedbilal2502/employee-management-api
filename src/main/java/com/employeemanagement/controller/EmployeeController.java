@@ -1,6 +1,6 @@
 package com.employeemanagement.controller;
 
-import com.employeemanagement.common.ConstantUrl;
+import com.employeemanagement.util.ConstantUrl;
 import com.employeemanagement.model.ApiResponse;
 import com.employeemanagement.model.dto.EmployeeDTO;
 import com.employeemanagement.service.EmployeeService;

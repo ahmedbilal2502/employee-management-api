@@ -1,11 +1,9 @@
 package com.employeemanagement.controller;
 
-import com.employeemanagement.common.ConstantUrl;
-import com.employeemanagement.common.ResponseMessage;
-import com.employeemanagement.entity.Role;
+import com.employeemanagement.util.ConstantUrl;
+import com.employeemanagement.util.ResponseMessage;
 import com.employeemanagement.model.ApiResponse;
 import com.employeemanagement.model.dto.EmployeeDTO;
-import com.employeemanagement.model.dto.RegisterRequest;
 import com.employeemanagement.repository.EmployeeRepository;
 import com.employeemanagement.service.EmployeeService;
 import com.fasterxml.jackson.databind.ObjectMapper;

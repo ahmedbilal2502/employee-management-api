@@ -1,6 +1,6 @@
 package com.employeemanagement.exception;
 
-import com.employeemanagement.common.ResponseMessage;
+import com.employeemanagement.util.ResponseMessage;
 import com.employeemanagement.model.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

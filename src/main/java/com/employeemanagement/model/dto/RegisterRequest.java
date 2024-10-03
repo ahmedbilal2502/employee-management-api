@@ -1,6 +1,6 @@
 package com.employeemanagement.model.dto;
 
-import com.employeemanagement.entity.Role;
+import com.employeemanagement.model.entity.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -1,6 +1,6 @@
 package com.employeemanagement.repository;
 
-import com.employeemanagement.entity.Employee;
+import com.employeemanagement.model.entity.Employee;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
