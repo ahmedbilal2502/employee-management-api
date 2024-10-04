@@ -1,5 +1,6 @@
 package com.employeemanagement.controller;
 
+import com.employeemanagement.model.entity.Role;
 import com.employeemanagement.util.ConstantUrl;
 import com.employeemanagement.model.ApiResponse;
 import com.employeemanagement.model.dto.EmployeeDTO;
@@ -8,6 +9,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,6 +22,7 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ApiResponse<EmployeeDTO>> createEmployee(
             @RequestHeader(name = HttpHeaders.AUTHORIZATION)
             @Valid @RequestBody EmployeeDTO employeeDTO) {

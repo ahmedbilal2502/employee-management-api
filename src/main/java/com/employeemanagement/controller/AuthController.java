@@ -5,6 +5,7 @@ import com.employeemanagement.model.dto.AuthenticationRequest;
 import com.employeemanagement.model.dto.RegisterRequest;
 import com.employeemanagement.model.response.AuthenticationResponse;
 import com.employeemanagement.service.AuthService;
+import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
@@ -19,6 +20,7 @@ import java.io.IOException;
 @RestController
 @RequestMapping(ConstantUrl.AUTH_BASE_URL)
 @AllArgsConstructor
+@Hidden
 public class AuthController {
 
     private final AuthService authService;
