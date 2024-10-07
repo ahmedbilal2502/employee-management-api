@@ -50,7 +50,7 @@ public class SecurityConfiguration {
                         req -> req.requestMatchers(WHITE_LIST_URL).permitAll().anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
-                .cors(httpSecurityCorsConfigurer -> httpSecurityCorsConfigurer.configurationSource(customCorsConfiguration))
+                .cors(AbstractHttpConfigurer::disable)
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .logout(logout -> logout.logoutUrl("/api/v1/auth/logout").addLogoutHandler(logoutHandler)
