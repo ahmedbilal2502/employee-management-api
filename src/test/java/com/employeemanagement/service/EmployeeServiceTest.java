@@ -1,13 +1,12 @@
 package com.employeemanagement.service;
 
-import com.employeemanagement.service.impl.EmployeeServiceImpl;
-import com.employeemanagement.util.ResponseMessage;
-import com.employeemanagement.model.entity.Employee;
 import com.employeemanagement.exception.EmployeeNotFoundException;
 import com.employeemanagement.mapper.EmployeeMapper;
 import com.employeemanagement.model.ApiResponse;
 import com.employeemanagement.model.dto.EmployeeDTO;
+import com.employeemanagement.model.entity.Employee;
 import com.employeemanagement.repository.EmployeeRepository;
+import com.employeemanagement.util.ResponseMessage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -34,7 +33,7 @@ class EmployeeServiceTest {
     private EmployeeMapper employeeMapper;
 
     @InjectMocks
-    private EmployeeServiceImpl employeeService;
+    private EmployeeService employeeService;
 
     private Employee employee;
     private EmployeeDTO employeeDTO;

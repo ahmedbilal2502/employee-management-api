@@ -2,15 +2,14 @@ package com.employeemanagement.service;
 
 
 import com.employeemanagement.config.jwt.JwtService;
+import com.employeemanagement.model.dto.AuthenticationRequest;
+import com.employeemanagement.model.dto.RegisterRequest;
 import com.employeemanagement.model.entity.Role;
 import com.employeemanagement.model.entity.Token;
 import com.employeemanagement.model.entity.User;
-import com.employeemanagement.model.dto.AuthenticationRequest;
-import com.employeemanagement.model.dto.RegisterRequest;
 import com.employeemanagement.model.response.AuthenticationResponse;
 import com.employeemanagement.repository.TokenRepository;
 import com.employeemanagement.repository.UserRepository;
-import com.employeemanagement.service.impl.AuthServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
@@ -31,7 +30,7 @@ import static org.mockito.Mockito.when;
 class AuthServiceTest {
 
     @InjectMocks
-    private AuthServiceImpl authService;
+    private AuthService authService;
 
     @Mock
     private UserRepository userRepository;

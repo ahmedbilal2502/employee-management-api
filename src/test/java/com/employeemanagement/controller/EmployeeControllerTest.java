@@ -3,7 +3,7 @@ package com.employeemanagement.controller;
 import com.employeemanagement.model.ApiResponse;
 import com.employeemanagement.model.dto.EmployeeDTO;
 import com.employeemanagement.repository.EmployeeRepository;
-import com.employeemanagement.service.impl.EmployeeServiceImpl;
+import com.employeemanagement.service.EmployeeService;
 import com.employeemanagement.util.ConstantUrl;
 import com.employeemanagement.util.ResponseMessage;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,7 +34,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class EmployeeControllerTest {
 
     @MockBean
-    private EmployeeServiceImpl employeeService;
+    private EmployeeService employeeService;
     @Autowired
     private MockMvc mockMvc;
     @Autowired

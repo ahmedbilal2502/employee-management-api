@@ -6,7 +6,7 @@ import com.employeemanagement.model.dto.RegisterRequest;
 import com.employeemanagement.model.entity.Role;
 import com.employeemanagement.model.response.AuthenticationResponse;
 import com.employeemanagement.repository.TokenRepository;
-import com.employeemanagement.service.impl.AuthServiceImpl;
+import com.employeemanagement.service.AuthService;
 import com.employeemanagement.util.ConstantUrl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,7 +32,7 @@ class AuthControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private AuthServiceImpl authService;
+    private AuthService authService;
 
     @Autowired
     private ObjectMapper objectMapper;
