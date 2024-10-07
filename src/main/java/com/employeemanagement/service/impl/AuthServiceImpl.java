@@ -1,6 +1,7 @@
 package com.employeemanagement.service.impl;
 
 import com.employeemanagement.config.jwt.JwtService;
+import com.employeemanagement.model.entity.Role;
 import com.employeemanagement.model.entity.Token;
 import com.employeemanagement.model.entity.TokenType;
 import com.employeemanagement.model.entity.User;
@@ -35,7 +36,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public AuthenticationResponse register(RegisterRequest request) {
-        User user = User.builder().firstname(request.getFirstname()).lastname(request.getLastname()).email(request.getEmail()).password(passwordEncoder.encode(request.getPassword())).role(request.getRole()).build();
+        User user = User.builder().firstname(request.getFirstname()).lastname(request.getLastname()).email(request.getEmail()).password(passwordEncoder.encode(request.getPassword())).role(Role.USER).build();
         User savedUser = repository.save(user);
         String jwtToken = jwtService.generateToken(user);
         String refreshToken = jwtService.generateRefreshToken(user);
