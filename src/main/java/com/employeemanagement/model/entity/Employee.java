@@ -31,7 +31,7 @@ public class Employee {
 
     @Email
     @NotBlank
-    @Column(unique = true)
+   // @Column(unique = true)
     private String email;
 
     @Column(name = "department")
