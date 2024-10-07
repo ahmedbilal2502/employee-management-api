@@ -1,10 +1,10 @@
 package com.employeemanagement.controller;
 
-import com.employeemanagement.util.ConstantUrl;
 import com.employeemanagement.model.dto.AuthenticationRequest;
 import com.employeemanagement.model.dto.RegisterRequest;
 import com.employeemanagement.model.response.AuthenticationResponse;
-import com.employeemanagement.service.AuthService;
+import com.employeemanagement.service.impl.AuthServiceImpl;
+import com.employeemanagement.util.ConstantUrl;
 import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -23,7 +23,7 @@ import java.io.IOException;
 @Hidden
 public class AuthController {
 
-    private final AuthService authService;
+    private final AuthServiceImpl authService;
 
     @PostMapping(ConstantUrl.AUTH_USER_REGISTERED)
     public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequest request) {

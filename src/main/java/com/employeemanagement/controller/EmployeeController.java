@@ -1,10 +1,9 @@
 package com.employeemanagement.controller;
 
-import com.employeemanagement.model.entity.Role;
 import com.employeemanagement.util.ConstantUrl;
 import com.employeemanagement.model.ApiResponse;
 import com.employeemanagement.model.dto.EmployeeDTO;
-import com.employeemanagement.service.EmployeeService;
+import com.employeemanagement.service.impl.EmployeeServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -19,7 +18,7 @@ import java.util.List;
 public class EmployeeController {
 
     @Autowired
-    private EmployeeService employeeService;
+    private EmployeeServiceImpl employeeService;
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")

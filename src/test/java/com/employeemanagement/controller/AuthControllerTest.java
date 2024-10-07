@@ -1,13 +1,13 @@
 package com.employeemanagement.controller;
 
-import com.employeemanagement.util.ConstantUrl;
 import com.employeemanagement.config.jwt.JwtService;
-import com.employeemanagement.model.entity.Role;
 import com.employeemanagement.model.dto.AuthenticationRequest;
 import com.employeemanagement.model.dto.RegisterRequest;
+import com.employeemanagement.model.entity.Role;
 import com.employeemanagement.model.response.AuthenticationResponse;
 import com.employeemanagement.repository.TokenRepository;
-import com.employeemanagement.service.AuthService;
+import com.employeemanagement.service.impl.AuthServiceImpl;
+import com.employeemanagement.util.ConstantUrl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,7 +32,7 @@ class AuthControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private AuthService authService;
+    private AuthServiceImpl authService;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -58,31 +58,19 @@ class AuthControllerTest {
         System.out.println(registerRequest);
         when(authService.register(registerRequest)).thenReturn(authenticationResponse);
 
-        mockMvc.perform(post(ConstantUrl.AUTH_BASE_URL.concat(ConstantUrl.AUTH_USER_REGISTERED))
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(registerRequest)))
-                .andExpect(status().isOk())
-                .andDo(print());
+        mockMvc.perform(post(ConstantUrl.AUTH_BASE_URL.concat(ConstantUrl.AUTH_USER_REGISTERED)).contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(registerRequest))).andExpect(status().isOk()).andDo(print());
     }
 
     @Test
     void shouldAuthenticateUser() throws Exception {
-        when(authService.authenticate(ArgumentMatchers.any(AuthenticationRequest.class)))
-                .thenReturn(authenticationResponse);
+        when(authService.authenticate(ArgumentMatchers.any(AuthenticationRequest.class))).thenReturn(authenticationResponse);
 
-        mockMvc.perform(post(ConstantUrl.AUTH_BASE_URL.concat(ConstantUrl.AUTHENTICATE))
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(authenticationRequest)))
-                .andExpect(status().isOk())
-                .andDo(print());
+        mockMvc.perform(post(ConstantUrl.AUTH_BASE_URL.concat(ConstantUrl.AUTHENTICATE)).contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(authenticationRequest))).andExpect(status().isOk()).andDo(print());
     }
 
     @Test
     void shouldRefreshToken() throws Exception {
         String token = "Bearer some_refresh_token";
-        mockMvc.perform(post(ConstantUrl.AUTH_BASE_URL.concat(ConstantUrl.REFRESH_TOKEN))
-                .header("Authorization", token))
-                .andExpect(status().isOk())
-                .andDo(print());
+        mockMvc.perform(post(ConstantUrl.AUTH_BASE_URL.concat(ConstantUrl.REFRESH_TOKEN)).header("Authorization", token)).andExpect(status().isOk()).andDo(print());
     }
 }

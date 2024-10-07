@@ -1,5 +1,6 @@
 package com.employeemanagement.service;
 
+import com.employeemanagement.service.impl.EmployeeServiceImpl;
 import com.employeemanagement.util.ResponseMessage;
 import com.employeemanagement.model.entity.Employee;
 import com.employeemanagement.exception.EmployeeNotFoundException;
@@ -33,7 +34,7 @@ class EmployeeServiceTest {
     private EmployeeMapper employeeMapper;
 
     @InjectMocks
-    private EmployeeService employeeService;
+    private EmployeeServiceImpl employeeService;
 
     private Employee employee;
     private EmployeeDTO employeeDTO;
@@ -104,7 +105,7 @@ class EmployeeServiceTest {
 
         assertThat(response.getStatusCode()).isEqualTo("200");
         assertThat(response.getMessage()).isEqualTo(ResponseMessage.GET_EMPLOYEE_MESSAGE);
-      //  assertThat(response.getData()).isEqualTo(employeeDTO);
+        //  assertThat(response.getData()).isEqualTo(employeeDTO);
 
         ArgumentCaptor<Employee> captor = ArgumentCaptor.forClass(Employee.class);
         verify(employeeRepository).save(captor.capture());
