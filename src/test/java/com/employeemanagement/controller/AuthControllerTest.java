@@ -47,7 +47,7 @@ class AuthControllerTest {
 
     @BeforeEach
     void setUp() {
-        registerRequest = new RegisterRequest("John", "Doe", "john.doe@example.com", "password", Role.USER);
+        registerRequest = new RegisterRequest("John", "Doe", "john.doe@example.com", "password");
         authenticationRequest = new AuthenticationRequest("john.doe@example.com", "password");
         authenticationResponse = new AuthenticationResponse("accessToken", "refreshToken");
     }
