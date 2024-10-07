@@ -12,9 +12,15 @@ public class CustomCorsConfiguration implements CorsConfigurationSource {
     @Override
     public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://disastrous-ursola-tajjgroup-5d7bcd12.koyeb.app", "http://localhost:8098"));
-        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
+
+        config.setAllowedOrigins(List.of("*"));
+
+        config.setAllowedMethods(List.of("*"));
+
         config.setAllowedHeaders(List.of("*"));
+        config.setAllowCredentials(true);
+
         return config;
     }
+
 }
