@@ -1,11 +1,14 @@
-# Use the official Eclipse Temurin image for JDK 17
-FROM eclipse-temurin:17-jdk-alpine
+# Build stage
+FROM eclipse-temurin:17-jdk-alpine AS builder
 
-# Set the working directory in the container
 WORKDIR /app
+COPY . .
+RUN ./mvnw package
 
-# Copy the Maven build artifact (the JAR file) into the container
-COPY target/employee-management-0.0.1-SNAPSHOT.jar employee-management.jar
+# Run stage
+FROM eclipse-temurin:17-jdk-alpine AS runner
 
-# Set the entry point to run the application
-ENTRYPOINT ["java", "-jar", "employee-management.jar"]
+WORKDIR /app
+COPY --from=builder /app/target/*.jar app.jar
+
+CMD ["java", "-jar", "app.jar"]
