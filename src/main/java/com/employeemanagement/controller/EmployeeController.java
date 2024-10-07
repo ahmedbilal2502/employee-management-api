@@ -22,7 +22,6 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ApiResponse<EmployeeDTO>> createEmployee(
             @RequestHeader(name = HttpHeaders.AUTHORIZATION)
             @Valid @RequestBody EmployeeDTO employeeDTO) {
