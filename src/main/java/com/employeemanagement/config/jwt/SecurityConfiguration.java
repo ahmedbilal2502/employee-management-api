@@ -1,5 +1,6 @@
 package com.employeemanagement.config.jwt;
 
+import com.employeemanagement.config.cors.CustomCorsConfiguration;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,6 +25,7 @@ public class SecurityConfiguration {
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
     private final LogoutHandler logoutHandler;
+    private final CustomCorsConfiguration customCorsConfiguration;
 
     private static final String[] WHITE_LIST_URL = {
             "/api/v1/auth/**",
@@ -48,6 +50,7 @@ public class SecurityConfiguration {
                         req -> req.requestMatchers(WHITE_LIST_URL).permitAll().anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
+                .cors(httpSecurityCorsConfigurer -> httpSecurityCorsConfigurer.configurationSource(customCorsConfiguration))
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .logout(logout -> logout.logoutUrl("/api/v1/auth/logout").addLogoutHandler(logoutHandler)
