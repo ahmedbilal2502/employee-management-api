@@ -1,8 +1,14 @@
-FROM maven:3.8.5-openjdk-17 AS build
-COPY . .
-RUN mvn clean package -DskipTests
+# Build stage
+FROM eclipse-temurin:17-jdk-alpine AS builder
 
-FROM openjdk:17.0.1-jdk-slim
-COPY --from=build /target/employee-management-0.0.1-SNAPSHOT.jar demo.jar
-EXPOSE 8080
-ENTRYPOINT ["java","-jar","demo.jar"]
+WORKDIR /app
+COPY . .
+RUN ./mvnw package
+
+# Run stage
+FROM eclipse-temurin:17-jdk-alpine AS runner
+
+WORKDIR /app
+COPY --from=builder /app/target/*.jar app.jar
+
+CMD ["java", "-jar", "app.jar"]
