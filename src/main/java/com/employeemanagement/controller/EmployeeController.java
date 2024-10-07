@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(ConstantUrl.EMPLOYEE_BASE_URL)
+@CrossOrigin(originPatterns = "*", allowedHeaders = "*", allowCredentials = "true")
 public class EmployeeController {
 
     @Autowired
