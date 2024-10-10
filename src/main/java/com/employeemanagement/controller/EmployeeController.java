@@ -15,7 +15,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping(ConstantUrl.EMPLOYEE_BASE_URL)
-@CrossOrigin
 public class EmployeeController {
 
     @Autowired
