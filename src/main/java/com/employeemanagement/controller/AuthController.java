@@ -18,6 +18,7 @@ import java.io.IOException;
 @RequestMapping(ConstantUrl.AUTH_BASE_URL)
 @AllArgsConstructor
 @Hidden
+@CrossOrigin
 public class AuthController {
 
     private final AuthService authService;
