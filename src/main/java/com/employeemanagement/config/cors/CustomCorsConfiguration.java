@@ -13,7 +13,7 @@ public class CustomCorsConfiguration implements CorsConfigurationSource {
     public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
         CorsConfiguration config = new CorsConfiguration();
 
-        config.setAllowedOrigins(List.of("*"));
+        config.setAllowedOriginPatterns(List.of("https://*","http://*"));
 
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
 
