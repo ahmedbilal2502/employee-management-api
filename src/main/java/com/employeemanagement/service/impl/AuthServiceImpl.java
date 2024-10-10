@@ -1,6 +1,7 @@
 package com.employeemanagement.service.impl;
 
 import com.employeemanagement.config.jwt.JwtService;
+import com.employeemanagement.exception.UserAlreadyExistsException;
 import com.employeemanagement.model.entity.Role;
 import com.employeemanagement.model.entity.Token;
 import com.employeemanagement.model.entity.TokenType;
@@ -36,6 +37,9 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public AuthenticationResponse register(RegisterRequest request) {
+        if (repository.findByEmail(request.getEmail()).isPresent()){
+            throw new UserAlreadyExistsException("Email already exists");
+        }
         User user = User.builder().firstname(request.getFirstname())
                 .lastname(request.getLastname())
                 .email(request.getEmail())

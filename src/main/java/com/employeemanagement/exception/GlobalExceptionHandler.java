@@ -32,6 +32,13 @@ public class GlobalExceptionHandler {
 
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
+    @ExceptionHandler(UserAlreadyExistsException.class)
+    public ResponseEntity<ApiResponse<String>> userAlreadyExit(UserAlreadyExistsException ex) {
+
+        ApiResponse errorResponse = new ApiResponse(String.valueOf(HttpStatus.CONFLICT.value()), ex.getMessage(), null);
+
+        return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
+    }
 
     @ExceptionHandler(InvalidCredentialsException.class)
     public ResponseEntity<ApiResponse<String>> invalidCredentialsException(InvalidCredentialsException ex) {
